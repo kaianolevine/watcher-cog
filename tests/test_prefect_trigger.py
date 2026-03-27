@@ -50,4 +50,3 @@ async def test_fire_raises_on_non_2xx(monkeypatch: pytest.MonkeyPatch) -> None:
 
     with pytest.raises(RuntimeError, match="server error"):
         await prefect_trigger.fire("dep-123")
-

@@ -51,4 +51,3 @@ async def run_watcher(config: WatcherConfig) -> None:
             log.error("[%s] poll error: %s", config.name, exc, exc_info=True)
 
         await asyncio.sleep(current_interval * 60)
-

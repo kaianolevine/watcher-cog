@@ -25,4 +25,3 @@ def _build_logger() -> logging.Logger:
 
 
 log = _build_logger()
-

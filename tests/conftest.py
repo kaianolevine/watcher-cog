@@ -14,4 +14,3 @@ class DummyDriveFile:
 @pytest.fixture
 def dummy_drive_file() -> type[DummyDriveFile]:
     return DummyDriveFile
-

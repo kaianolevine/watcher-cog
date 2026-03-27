@@ -181,4 +181,3 @@ async def test_activity_signal_old_file_uses_idle_interval(
         await run_watcher(config)
 
     assert sleep_calls == [600]
-

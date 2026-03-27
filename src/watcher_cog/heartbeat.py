@@ -21,4 +21,3 @@ async def ping() -> None:
             response.raise_for_status()
     except Exception as exc:
         log.error("healthcheck ping failed: %s", exc, exc_info=True)
-

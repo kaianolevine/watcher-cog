@@ -55,4 +55,3 @@ async def test_ping_exception_logged_not_raised(monkeypatch: pytest.MonkeyPatch)
     await heartbeat.ping()
 
     logger.error.assert_called_once()
-

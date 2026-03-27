@@ -33,4 +33,3 @@ async def fire(deployment_id: str) -> None:
             response.status_code,
         )
         response.raise_for_status()
-
