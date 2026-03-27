@@ -20,7 +20,8 @@ async def test_fire_success_logs_status(monkeypatch: pytest.MonkeyPatch) -> None
     context_manager = MagicMock()
     context_manager.__aenter__ = AsyncMock(return_value=client)
     context_manager.__aexit__ = AsyncMock(return_value=None)
-    monkeypatch.setattr(prefect_trigger.httpx, "AsyncClient", MagicMock(return_value=context_manager))
+    mock_client_cls = MagicMock(return_value=context_manager)
+    monkeypatch.setattr(prefect_trigger.httpx, "AsyncClient", mock_client_cls)
 
     logger = MagicMock()
     monkeypatch.setattr(prefect_trigger, "log", logger)
@@ -44,7 +45,8 @@ async def test_fire_raises_on_non_2xx(monkeypatch: pytest.MonkeyPatch) -> None:
     context_manager = MagicMock()
     context_manager.__aenter__ = AsyncMock(return_value=client)
     context_manager.__aexit__ = AsyncMock(return_value=None)
-    monkeypatch.setattr(prefect_trigger.httpx, "AsyncClient", MagicMock(return_value=context_manager))
+    mock_client_cls = MagicMock(return_value=context_manager)
+    monkeypatch.setattr(prefect_trigger.httpx, "AsyncClient", mock_client_cls)
 
     with pytest.raises(RuntimeError, match="server error"):
         await prefect_trigger.fire("dep-123")

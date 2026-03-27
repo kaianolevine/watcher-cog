@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import os
 from datetime import datetime
-from typing import Any
 
 from watcher_cog.logger import log
 
@@ -13,17 +12,17 @@ try:
     from kaiano.google.types import DriveFile
 except ImportError:  # pragma: no cover
     GoogleAPI = None  # type: ignore[assignment]
-    DriveFile = Any  # type: ignore[assignment,misc]
+    DriveFile = object  # type: ignore[assignment,misc]
 
 
-_google_api: Any | None = None
+_google_api: GoogleAPI | None = None
 
 
 def _parse_modified_time(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
-def _get_google_api() -> Any:
+def _get_google_api() -> GoogleAPI:
     global _google_api
     if _google_api is not None:
         return _google_api

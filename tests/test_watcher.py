@@ -1,14 +1,15 @@
 from __future__ import annotations
 
+from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime, timedelta
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
+import watcher_cog.watcher as watcher_module
 from watcher_cog.config import WatcherConfig
 from watcher_cog.watcher import run_watcher
-import watcher_cog.watcher as watcher_module
 
 
 class LoopExit(Exception):
@@ -19,7 +20,10 @@ def _file(file_id: str) -> SimpleNamespace:
     return SimpleNamespace(id=file_id, name=f"{file_id}.txt", mime_type=None, modified_time=None)
 
 
-def _make_sleep(stop_after_calls: int, calls: list[float]):
+def _make_sleep(
+    stop_after_calls: int,
+    calls: list[float],
+) -> Callable[[float], Awaitable[None]]:
     async def _sleep(seconds: float) -> None:
         calls.append(seconds)
         if len(calls) >= stop_after_calls:
@@ -30,7 +34,10 @@ def _make_sleep(stop_after_calls: int, calls: list[float]):
 
 @pytest.mark.asyncio
 async def test_first_run_initializes_without_trigger(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(watcher_module.drive_client, "list_folder", lambda _: [_file("a"), _file("b")])
+    def list_folder(_: str) -> list:
+        return [_file("a"), _file("b")]
+
+    monkeypatch.setattr(watcher_module.drive_client, "list_folder", list_folder)
     fire = AsyncMock()
     monkeypatch.setattr(watcher_module.prefect_trigger, "fire", fire)
     monkeypatch.setattr(watcher_module.heartbeat, "ping", AsyncMock())
@@ -86,7 +93,7 @@ async def test_second_run_with_new_files_fires_trigger(monkeypatch: pytest.Monke
 
 @pytest.mark.asyncio
 async def test_poll_error_caught_and_loop_continues(monkeypatch: pytest.MonkeyPatch) -> None:
-    def _list_folder(_: str):
+    def _list_folder(_: str) -> list:
         if _list_folder.calls == 0:
             _list_folder.calls += 1
             raise RuntimeError("boom")
