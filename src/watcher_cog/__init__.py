@@ -1,0 +1,2 @@
+"""watcher-cog package."""
+
