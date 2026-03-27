@@ -16,9 +16,5 @@ class WatcherConfig:
     activity_file_id: str | None = None
     activity_threshold_min: int = 10
 
-    def __post_init__(self) -> None:
-        if self.idle_interval_min == 1 and self.interval_min != 1:
-            object.__setattr__(self, "idle_interval_min", self.interval_min)
-
 
 WATCHERS: list[WatcherConfig] = []
