@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "httpx",
-    "kaiano-common-utils",
+    "kaiano",
     "python-dotenv",
 ]
 
@@ -17,6 +17,9 @@ dev = [
     "pytest-cov",
     "ruff",
 ]
+
+[tool.uv.sources]
+kaiano = { git = "https://github.com/kaianolevine/kaiano-common-utils.git", rev = "main" }
 
 [build-system]
 requires = ["hatchling"]
@@ -35,3 +38,5 @@ pythonpath = ["src"]
 asyncio_mode = "auto"
 testpaths = ["tests"]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/watcher_cog"]
