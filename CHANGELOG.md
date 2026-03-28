@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/kaianolevine/watcher-cog/compare/v1.1.0...v1.1.1) (2026-03-28)
+
+
+### Bug Fixes
+
+* use GoogleAPI.from_env() in drive_client ([7a9bf47](https://github.com/kaianolevine/watcher-cog/commit/7a9bf47fbf0af054db18d9c00fba4a1c9de36407))
+
 # [1.1.0](https://github.com/kaianolevine/watcher-cog/compare/v1.0.0...v1.1.0) (2026-03-28)
 
 
