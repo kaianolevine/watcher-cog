@@ -7,8 +7,8 @@ from datetime import datetime
 from watcher_cog.logger import log
 
 try:
-    from kaiano.google import GoogleAPI
-    from kaiano.google.types import DriveFile
+    from mini_app_polis.google import GoogleAPI
+    from mini_app_polis.google.types import DriveFile
 except ImportError:  # pragma: no cover
     GoogleAPI = None  # type: ignore[assignment]
     DriveFile = object  # type: ignore[assignment,misc]
@@ -27,7 +27,7 @@ def _get_google_api() -> GoogleAPI:
         return _google_api
 
     if GoogleAPI is None:
-        raise RuntimeError("kaiano-common-utils is required to use drive_client")
+        raise RuntimeError("common-python-utils is required to use drive_client")
 
     _google_api = GoogleAPI.from_env()
     return _google_api
