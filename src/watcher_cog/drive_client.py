@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 from datetime import datetime
 
 from watcher_cog.logger import log
@@ -30,11 +29,7 @@ def _get_google_api() -> GoogleAPI:
     if GoogleAPI is None:
         raise RuntimeError("kaiano-common-utils is required to use drive_client")
 
-    credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON", "").strip()
-    if not credentials_json:
-        raise RuntimeError("GOOGLE_CREDENTIALS_JSON is not set")
-
-    _google_api = GoogleAPI(credentials_json=credentials_json)
+    _google_api = GoogleAPI.from_env()
     return _google_api
 
 
