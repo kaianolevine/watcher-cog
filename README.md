@@ -63,7 +63,7 @@ State is intentionally in-memory. On restart, each watcher re-fetches the curren
 
 ```bash
 # Clone and install dependencies
-git clone https://github.com/your-org/watcher-cog
+git clone https://github.com/mini-app-polis/watcher-cog
 cd watcher-cog
 uv sync
 
