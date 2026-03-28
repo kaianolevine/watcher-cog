@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/kaianolevine/watcher-cog/compare/v1.0.0...v1.1.0) (2026-03-28)
+
+
+### Features
+
+* configuring first watchers ([900590a](https://github.com/kaianolevine/watcher-cog/commit/900590a0a841d91a2cbd208ea66fa8b996b05d7d))
+
 # 1.0.0 (2026-03-27)
 
 
